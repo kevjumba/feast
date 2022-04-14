@@ -116,7 +116,7 @@ if os.getenv("FEAST_IS_LOCAL_TEST", "False") != "True":
             ),
             # Go implementation for online retrieval
             IntegrationTestRepoConfig(
-                online_store=REDIS_CONFIG, go_feature_server=True,
+                online_store=REDIS_CONFIG, go_feature_retrieval=True,
             ),
             IntegrationTestRepoConfig(
                 online_store=REDIS_CONFIG,
@@ -153,7 +153,7 @@ if os.getenv("FEAST_LOCAL_ONLINE_CONTAINER", "False").lower() == "true":
 
 
 GO_REPO_CONFIGS = [
-    IntegrationTestRepoConfig(online_store=REDIS_CONFIG, go_feature_server=True,),
+    IntegrationTestRepoConfig(online_store=REDIS_CONFIG, go_feature_retrieval=True,),
 ]
 
 
@@ -422,7 +422,7 @@ def construct_test_environment(
         online_store=online_store,
         repo_path=repo_dir_name,
         feature_server=feature_server,
-        go_feature_server=test_repo_config.go_feature_server,
+        go_feature_retrieval=test_repo_config.go_feature_retrieval,
     )
 
     # Create feature_store.yaml out of the config
