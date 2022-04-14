@@ -1285,7 +1285,7 @@ class FeatureStore:
                     raise ValueError("All entity_rows must have the same keys.") from e
 
         # If Go feature server is enabled, send request to it instead of going through a regular Python logic
-        if self.config.go_feature_server:
+        if self.config.go_feature_retrieval:
             from feast.embedded_go.online_features_service import (
                 EmbeddedOnlineFeatureServer,
             )
