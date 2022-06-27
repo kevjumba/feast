@@ -182,7 +182,7 @@ jobs:
           pip install wheel
           for f in *.whl; do pip install $f || true; done
       - name: Install sdist
-        if: ${{ matrix.from-source }}
+        if: ${{ matrix.from-source && matrix.python-version != '3.10'}}
         env:
           COMPILE_GO: "True"
         run: |
