@@ -25,7 +25,7 @@ jobs:
         run: echo '::set-output name=WAS_EDITED::'$(test -n "$(git log --format=%H --since='24 hours ago')" && echo 'true' || echo 'false')
 
   integration-test-python:
-    needs: [check_date]
+    needs: check_date
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
