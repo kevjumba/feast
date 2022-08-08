@@ -91,7 +91,7 @@ jobs:
       - name: Test python
         if: ${{ always() }}  # this will guarantee that step won't be canceled and resources won't leak
         env:
-          GCS_STAGING_LOCATION: "feast-staging-demo"
+          GCS_STAGING_LOCATION: "gs://feast-staging-demo"
           GCS_REGION: "US"
         # Run only BigQuery and File tests without dynamo and redshift tests.
         run: |
