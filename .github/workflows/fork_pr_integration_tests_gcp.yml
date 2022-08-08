@@ -95,6 +95,6 @@ jobs:
           GCS_REGION: "US"
         # Run only BigQuery and File tests without dynamo and redshift tests.
         run: |
-          pytest -n 8 --cov=./ --cov-report=xml --color=yes sdk/python/tests/integration/offline_store/test_universal_historical_retrieval.py::test_historical_features --integration --durations=5 --timeout=1200 --timeout_method=thread -k "BigQuery and not dynamo and not Redshift and not Snowflake"
-          pytest -n 8 --cov=./ --cov-report=xml --color=yes sdk/python/tests --integration --durations=5 --timeout=1200 --timeout_method=thread -k "File and not dynamo and not Redshift and not Snowflake"
+          pytest -n 8 --cov=./ --cov-report=xml --color=yes sdk/python/tests --integration --durations=5 --timeout=1200 --timeout_method=thread -k "BigQuery and not dynamo and not Redshift and not Snowflake"
+          pytest -n 8 --cov=./ --cov-report=xml --color=yes sdk/python/tests --integration --durations=5 --timeout=1200 --timeout_method=thread -k "File and not dynamo and not Redshift and not Snowflake and not datastore"
 
