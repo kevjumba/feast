@@ -534,15 +534,23 @@ class BigQueryRetrievalJob(RetrievalJob):
         bucket: str
         prefix: str
         storage_client = StorageClient(project=self.client.project)
+        print("asdfsaf")
         bucket, prefix = self._gcs_path[len("gs://") :].split("/", 1)
         prefix = prefix.rsplit("/", 1)[0]
         if prefix.startswith("/"):
             prefix = prefix[1:]
 
+        print("bucket_prefix")
+        print(bucket)
+        print(prefix)
+
         blobs = storage_client.list_blobs(bucket, prefix=prefix)
+        print("ASdfasdf")
         results = []
         for b in blobs:
             results.append(f"gs://{b.bucket.name}/{b.name}")
+            print(b.bucket.name)
+        print("ASdfasdfs")
         return results
 
 
