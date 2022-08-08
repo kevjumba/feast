@@ -513,20 +513,24 @@ class BigQueryRetrievalJob(RetrievalJob):
                 "offline store when executing `to_remote_storage()`"
             )
 
+        print("==================================")
+        print(self._gcs_path)
         table = self.to_bigquery()
+
+        print("==================================")
+        print(table)
 
         job_config = bigquery.job.ExtractJobConfig()
         job_config.destination_format = "PARQUET"
-
+        print("out")
         extract_job = self.client.extract_table(
             table,
             destination_uris=[f"{self._gcs_path}/*.parquet"],
             location=self.config.offline_store.location,
             job_config=job_config,
         )
+        print("Asfdasdf")
         extract_job.result()
-        print("==================================")
-        print(self._gcs_path)
         bucket: str
         prefix: str
         storage_client = StorageClient(project=self.client.project)
