@@ -525,7 +525,8 @@ class BigQueryRetrievalJob(RetrievalJob):
             job_config=job_config,
         )
         extract_job.result()
-
+        print("==================================")
+        print(self._gcs_path)
         bucket: str
         prefix: str
         storage_client = StorageClient(project=self.client.project)
