@@ -525,9 +525,9 @@ class BigQueryRetrievalJob(RetrievalJob):
             job_config=job_config,
         )
         extract_job.result()
+
         bucket: str
         prefix: str
-
         storage_client = StorageClient(project=self.client.project)
         bucket, prefix = self._gcs_path[len("gs://") :].split("/", 1)
         prefix = prefix.rsplit("/", 1)[0]
