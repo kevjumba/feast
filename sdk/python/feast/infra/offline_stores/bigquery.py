@@ -513,44 +513,30 @@ class BigQueryRetrievalJob(RetrievalJob):
                 "offline store when executing `to_remote_storage()`"
             )
 
-        print("==================================")
-        print(self._gcs_path)
         table = self.to_bigquery()
-
-        print("==================================")
-        print(table)
 
         job_config = bigquery.job.ExtractJobConfig()
         job_config.destination_format = "PARQUET"
-        print("out")
         extract_job = self.client.extract_table(
             table,
             destination_uris=[f"{self._gcs_path}/*.parquet"],
             location=self.config.offline_store.location,
             job_config=job_config,
         )
-        print("Asfdasdf")
         extract_job.result()
         bucket: str
         prefix: str
         storage_client = StorageClient(project=self.client.project)
-        print("asdfsaf")
         bucket, prefix = self._gcs_path[len("gs://") :].split("/", 1)
         prefix = prefix.rsplit("/", 1)[0]
         if prefix.startswith("/"):
             prefix = prefix[1:]
 
-        print("bucket_prefix")
-        print(bucket)
-        print(prefix)
-
         blobs = storage_client.list_blobs(bucket, prefix=prefix)
-        print("ASdfasdf")
         results = []
         for b in blobs:
             results.append(f"gs://{b.bucket.name}/{b.name}")
             print(b.bucket.name)
-        print("ASdfasdfs")
         return results
 
 
