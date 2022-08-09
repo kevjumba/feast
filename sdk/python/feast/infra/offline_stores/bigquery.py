@@ -517,6 +517,7 @@ class BigQueryRetrievalJob(RetrievalJob):
 
         job_config = bigquery.job.ExtractJobConfig()
         job_config.destination_format = "PARQUET"
+
         extract_job = self.client.extract_table(
             table,
             destination_uris=[f"{self._gcs_path}/*.parquet"],
@@ -526,6 +527,7 @@ class BigQueryRetrievalJob(RetrievalJob):
         extract_job.result()
         bucket: str
         prefix: str
+
         storage_client = StorageClient(project=self.client.project)
         bucket, prefix = self._gcs_path[len("gs://") :].split("/", 1)
         prefix = prefix.rsplit("/", 1)[0]
@@ -536,7 +538,6 @@ class BigQueryRetrievalJob(RetrievalJob):
         results = []
         for b in blobs:
             results.append(f"gs://{b.bucket.name}/{b.name}")
-            print(b.bucket.name)
         return results
 
 
